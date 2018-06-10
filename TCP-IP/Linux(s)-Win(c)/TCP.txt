@@ -1,0 +1,3 @@
+gcc 'Source file name' -o 'Executble file name'
+
+client can send but cannot receive

@@ -1,0 +1,12 @@
+﻿  Source.cpp
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(24): error C2059: 構文エラー: ')'
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(34): error C2065: 'stAddr': 定義されていない識別子です。
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(34): error C2228: '.sin_addr' の左側はクラス、構造体、共用体でなければなりません
+  c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(34): note: 型は 'unknown-type' です。
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(34): error C2228: '.S_un' の左側はクラス、構造体、共用体でなければなりません
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(34): error C2228: '.S_addr' の左側はクラス、構造体、共用体でなければなりません
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(37): warning C4244: '=': 'SOCKET' から 'int' への変換です。データが失われる可能性があります。
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(44): error C2065: 'i': 定義されていない識別子です。
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(46): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(28): error C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: 'scanf' の宣言を確認してください

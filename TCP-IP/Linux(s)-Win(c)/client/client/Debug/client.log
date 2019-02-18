@@ -1,4 +1,0 @@
-﻿  Source.cpp
-c:\users\rabum\documents\visual studio 2017\projects\client\client\source.cpp(18): warning C4101: 'status': ローカル変数は 1 度も使われていません。
-  client.vcxproj -> c:\users\rabum\documents\visual studio 2017\Projects\client\Debug\client.exe
-  client.vcxproj -> c:\users\rabum\documents\visual studio 2017\Projects\client\Debug\client.pdb (Partial PDB)

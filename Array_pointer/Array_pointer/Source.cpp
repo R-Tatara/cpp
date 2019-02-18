@@ -3,8 +3,7 @@ using namespace std;
 
 int func(float val, float array[3]);
 
-int main()
-{
+int main() {
 	float array[3];
 	func(1.5F, array);
 	cout << array[0] << "\t" << array[1] << "\t" << array[2] << endl;

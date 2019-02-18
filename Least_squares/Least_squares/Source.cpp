@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Å¬“ñæ–@‚ÌŒvZ 
 void LeastSquaresMethod(double x[], double y[], int N, double *a0, double *a1) {
 	int i;
 	double A00 = 0, A01 = 0, A02 = 0, A11 = 0, A12 = 0;

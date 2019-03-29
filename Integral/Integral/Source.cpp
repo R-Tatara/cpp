@@ -99,11 +99,11 @@ int main(void) {
 		simple.Integral(num.data);
 		trapezoid.Integral(i, num.data_buf, num.data);
 		simpson.Integral(i, num.data_buf, num.data);
-		printf("Time : %lf, Val : %+lf, Sum1 : %+lf, Sum2 : %+lf, Sum3 : %+lf\n", 
-			time, 
-			num.data, 
-			simple.sum, 
-			trapezoid.sum, 
+		printf("Time : %lf, Val : %+lf, Sum1 : %+lf, Sum2 : %+lf, Sum3 : %+lf\n",
+			time,
+			num.data,
+			simple.sum,
+			trapezoid.sum,
 			simpson.sum_a);
 		i++;
 	}
@@ -111,4 +111,3 @@ int main(void) {
 	getchar();
 	return 0;
 }
-

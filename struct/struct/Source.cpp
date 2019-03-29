@@ -10,7 +10,7 @@ public:
 	float z;
 };
 
-class Parameter{
+class Parameter {
 public:
 	Direction sensor;
 	Direction target;
@@ -28,24 +28,24 @@ int main() {
 
 /*
 typedef struct {
-	float x;
-	float y;
-	float z;
+float x;
+float y;
+float z;
 }direction;
 
 typedef struct {
-	direction sensor;
-	direction target;
+direction sensor;
+direction target;
 }parameter;
 
 parameter A;
 parameter B;
 
 int main() {
-	A.sensor.x = 1.0F;
-	printf("%f", A.sensor.x);
-	getchar();
+A.sensor.x = 1.0F;
+printf("%f", A.sensor.x);
+getchar();
 
-	return 0;
+return 0;
 }
 */

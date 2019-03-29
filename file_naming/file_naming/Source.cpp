@@ -11,7 +11,7 @@ int main() {
 
 	error = localtime_s(&now_time, &tim);
 	
-	sprintf_s(filename, "/Users/rabum/source/repos/file_naming/%04d%02d%02d%02d%02d%02d.csv",
+	sprintf_s(filename, "/Users/rabum/source/repos/file_naming/%04d%02d%02d%02d%02d%02d.txt",
 		now_time.tm_year + 1900,
 		now_time.tm_mon + 1,
 		now_time.tm_mday,

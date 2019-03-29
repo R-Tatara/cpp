@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{63631AD7-8A39-49EB-9ECC-F934B3EA7D92}</ProjectGuid>
-    <RootNamespace>SimultaneousEquation</RootNamespace>
+    <ProjectGuid>{8865E7A4-ACE1-4949-9F34-9E321DAF3F24}</ProjectGuid>
+    <RootNamespace>Designvelocity</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

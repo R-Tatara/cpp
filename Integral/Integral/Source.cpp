@@ -7,8 +7,7 @@
 #define SAMPLING_TIME 0.001 //[s]
 #define MAX_TIME 3.14  //[s]
 
-class Num
-{
+class Num {
 public:
 	double data_buf;
 	double data;
@@ -20,8 +19,7 @@ public:
 };
 
 //Quadrature by parts
-class Simple
-{
+class Simple {
 public:
 	double sum;
 	int  Integral(double data) {
@@ -35,8 +33,7 @@ public:
 };
 
 //Trapezoidal rule
-class Trapezoid
-{
+class Trapezoid {
 public:
 	double sum;
 	int  Integral(int cycle, double data_buf, double data) {
@@ -52,8 +49,7 @@ public:
 };
 
 //Simpson's rule
-class Simpson
-{
+class Simpson {
 public:
 	double sum;
 	double sum_a;
@@ -89,7 +85,7 @@ Simple simple;
 Trapezoid trapezoid;
 Simpson simpson;
 
-int main(void) {
+int main() {
 	int i = 0;
 	double time = 0.0;
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 
-int main(void) {
+int main() {
 	char key = 0;
 
 	while (1) {

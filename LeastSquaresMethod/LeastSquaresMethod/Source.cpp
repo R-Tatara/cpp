@@ -1,6 +1,6 @@
 #include <iostream>
 
-#define M 10 //—\‘ª‹Èü‚ÌŸ”
+#define M 10 //Approximation order
 
 using namespace std;
 

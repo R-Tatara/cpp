@@ -109,8 +109,7 @@ int main() {
 	double b[THE_NUMBER_OF_POINTS] = { 0 };
 	
 	std::cout << "No\ta\tb" << std::endl;
-	for (int i = 0; i < THE_NUMBER_OF_POINTS; i++)
-	{
+	for (int i = 0; i < THE_NUMBER_OF_POINTS; i++) {
 		double it = 0.1 * (double)i;
 		a[i] = 2 * it + (double(rand() % 5));
 		b[i] = 3 * it - (double(rand() % 5));

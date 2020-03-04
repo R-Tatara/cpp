@@ -28,6 +28,48 @@ double getMean(tArray& iArray) {
 	return mean;
 }
 
+//Calculate maximum value of array
+template<typename tArray>
+double getMax(tArray& iArray) {
+	double max;
+
+	std::size_t element = getArraySize(iArray);
+	if (element == 0) {
+		std::cerr << "Array size should be more than zero" << std::endl;
+		return 0;
+	}
+
+	max = iArray[0];
+	for (int i = 1; i < (int)element; i++) {
+		if (max < iArray[i]) {
+			max = iArray[i];
+		}
+	}
+
+	return max;
+}
+
+//Calculate minimum value of array
+template<typename tArray>
+double getMin(tArray& iArray) {
+	double min;
+
+	std::size_t element = getArraySize(iArray);
+	if (element == 0) {
+		std::cerr << "Array size should be more than zero" << std::endl;
+		return 0;
+	}
+
+	min = iArray[0];
+	for (int i = 1; i < (int)element; i++) {
+		if (min > iArray[i]) {
+			min = iArray[i];
+		}
+	}
+
+	return min;
+}
+
 //Calculate variance of array
 template<typename tArray>
 double getVariance(tArray& iArray) {
@@ -118,6 +160,8 @@ int main() {
 	
 	std::cout << std::endl;
 	std::cout << "mean_a : " << getMean(a) << std::endl << "mean_b : " << getMean(b) << std::endl;
+	std::cout << "max_a : " << getMax(a) << std::endl << "max_b : " << getMax(b) << std::endl;
+	std::cout << "min_a : " << getMax(a) << std::endl << "min_b : " << getMax(b) << std::endl;
 	std::cout << "variance_a : " << getVariance(a) << std::endl << "variance_b : " << getVariance(b) << std::endl;
 	std::cout << "sd_a : " << getStandardDiviation(a) << std::endl << "sd_b : " << getStandardDiviation(b) << std::endl;
 	std::cout << "covariance : " << getCovariance(a, b) << std::endl;

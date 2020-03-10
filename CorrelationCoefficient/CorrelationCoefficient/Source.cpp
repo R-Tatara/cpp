@@ -128,7 +128,7 @@ double getCovariance(tArray1& iArray1, tArray2& iArray2) {
 	return covariance ;
 }
 
-//Calculate standard diviation of array
+//Calculate correlation coefficient of arrays
 template<typename tArray1, typename tArray2>
 double getCorrelation(tArray1& iArray1, tArray2& iArray2) {
 	double correlation;
@@ -138,7 +138,7 @@ double getCorrelation(tArray1& iArray1, tArray2& iArray2) {
 	deno = getCovariance(iArray1, iArray2);
 	nume = getStandardDiviation(iArray1) * getStandardDiviation(iArray2);
 	if (nume == 0.0) {
-		std::cerr << "Standard diviation of array should not be zero" << std::endl;
+		std::cerr << "Standard diviations of arrays should not be zero" << std::endl;
 		return 0;
 	}
 	correlation = deno / nume;

@@ -3,12 +3,12 @@
 #include "statistics.h"
 using namespace std;
 
-#define THE_NUMBER_OF_POINTS 100 
+#define THE_NUMBER_OF_POINTS 20 
 
 int main() {
 	double a[THE_NUMBER_OF_POINTS] = { 0 };
 	double b[THE_NUMBER_OF_POINTS] = { 0 };
-	
+
 	//Sample data
 	cout << "---Sample data---" << endl;
 	cout << "No\ta\tb" << endl;
@@ -17,7 +17,7 @@ int main() {
 		a[i] = 2 * it + (double(rand() % 5));
 		b[i] = 3 * it - (double(rand() % 5));
 		cout << i << "\t" << a[i] << "\t" << b[i] << endl;
-	} 
+	}
 
 	//Fundamental statistics
 	cout << endl << "---Fundamental statistics---" << endl;

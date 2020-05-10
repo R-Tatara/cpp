@@ -135,7 +135,7 @@ double getCorrelation(tArray1& iArray1, tArray2& iArray2) {
 	deno = getCovariance(iArray1, iArray2);
 	nume = getStandardDiviation(iArray1) * getStandardDiviation(iArray2);
 	if (nume == 0.0) {
-		std::cerr << "Standard diviations of arrays should not be zero" << std::endl;
+		std::cerr << "Standard diviations should not be zero" << std::endl;
 		return 0;
 	}
 	correlation = deno / nume;

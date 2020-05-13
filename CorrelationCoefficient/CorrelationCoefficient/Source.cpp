@@ -3,11 +3,11 @@
 #include "statistics.h"
 using namespace std;
 
-#define THE_NUMBER_OF_POINTS 20 
+#define THE_NUMBER_OF_POINTS 20
 
 int main() {
-	double a[THE_NUMBER_OF_POINTS] = { 0 };
-	double b[THE_NUMBER_OF_POINTS] = { 0 };
+	double a[THE_NUMBER_OF_POINTS] = { 0.0 };
+	double b[THE_NUMBER_OF_POINTS] = { 0.0 };
 
 	//Sample data
 	cout << "---Sample data---" << endl;

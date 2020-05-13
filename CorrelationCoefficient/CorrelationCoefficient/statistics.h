@@ -1,5 +1,14 @@
 #pragma once
 
+template<typename tArray> std::size_t getArraySize(tArray& iArray);
+template<typename tArray> double getMean(tArray& iArray);
+template<typename tArray> double getMax(tArray& iArray);
+template<typename tArray> double getMin(tArray& iArray);
+template<typename tArray> double getVariance(tArray& iArray);
+template<typename tArray> double getStandardDiviation(tArray& iArray);
+template<typename tArray1, typename tArray2> double getCovariance(tArray1& iArray1, tArray2& iArray2);
+template<typename tArray1, typename tArray2> double getCorrelation(tArray1& iArray1, tArray2& iArray2);
+
 //Calculate the number of elements in array
 template<typename tArray>
 std::size_t getArraySize(tArray& iArray) {

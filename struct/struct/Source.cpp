@@ -1,51 +1,46 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <iostream>
 
-using namespace std;
+typedef unsigned int uint;
 
-class Direction {
-public:
-	float x;
-	float y;
-	float z;
-};
+typedef struct{
+	int member;
+	char str[16];
+}structname;
 
-class Parameter {
-public:
-	Direction sensor;
-	Direction target;
-};
+//非推奨（宣言にstructが必要なため）
+//struct structname1 {
+//	int member;
+//};
 
-Parameter A;
-Parameter B;
+void function(structname arg1, structname *arg2);
+
+structname A = {1, "hoge1"};
+structname B;
+structname tmpC;
+structname *C = &tmpC;
+structname D[2];
 
 int main() {
-	A.sensor.x = 1.0F;
-	cout << A.sensor.x << endl;
-	getchar();
+	B.member = 2;
+	sprintf(B.str, "hoge2");
+	C->member = 3;
+	sprintf(C->str, "hoge3");
+	D[0].member = 4;
+	sprintf(D[0].str, "hoge4");
+
+	function(A, &A);
+
+	printf("A : %d %s\n", A.member, A.str);
+	printf("B : %d %s\n", B.member, B.str);
+	printf("C : %d %s\n", C->member, C->str); //C->member = (*C).member
+	printf("D : %d %s\n", D[0].member, D[0].str);
 	return 0;
 }
 
-/*
-typedef struct {
-float x;
-float y;
-float z;
-}direction;
+void function(structname arg1, structname *arg2) {
+	arg1.member = 0; //値渡し
+	sprintf(arg2->str, "hoge0"); //参照渡し
 
-typedef struct {
-direction sensor;
-direction target;
-}parameter;
-
-parameter A;
-parameter B;
-
-int main() {
-A.sensor.x = 1.0F;
-printf("%f", A.sensor.x);
-getchar();
-
-return 0;
+	return;
 }
-*/

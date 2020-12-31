@@ -1,61 +1,121 @@
 #include <iostream>
+#include <iomanip>
 #include <queue>
-using namespace std;
 
-class Queue {
+
+//1 data queue
+class OnedataQueue {
 private:
-    const unsigned int max_qsize;
-    unsigned int qsize;
-    queue<double> data;
+	const unsigned int MAX_QSIZE;
+	unsigned int qsize;
+	std::queue<double> data;
 public:
-    Queue();
-    void Get(double arg_data);
-    void Disp(void);
+	OnedataQueue();
+	void Get(double arg_data);
+	bool Disp(void);
 };
 
-Queue::Queue() :
-    max_qsize(8)
-{
+OnedataQueue::OnedataQueue() :
+	MAX_QSIZE(8) {
 }
 
-//Queue processing
-void Queue::Get(double arg_data) {
-    this->data.push(arg_data);
-    if (this->data.size() > this->max_qsize) {
-        this->data.pop();
-    }
+//Queue storing
+void OnedataQueue::Get(double arg_data) {
+	this->data.push(arg_data);
 
-    return;
+	if (this->data.size() > this->MAX_QSIZE) {
+		this->data.pop();
+	}
+	return;
 }
 
 //Displaying queue
-void Queue::Disp() {
-    if (this->data.empty() == true) {
-        cout << "Queue is empty" << endl;
-    }
-    else {
-        this->qsize = this->data.size();
-        for (unsigned int i = 0; i < this->qsize; i++) {
-            cout << this->data.front() << endl;
-            this->data.pop();
-        }
-    }
-
-    return;
+bool OnedataQueue::Disp() {
+	if (this->data.empty() == true) {
+		std::cerr << "Queue is empty" << std::endl;
+		return false;
+	}
+	else {
+		std::cout << "   data1" << std::endl;
+		this->qsize = this->data.size();
+		for (unsigned int qnum = 0; qnum < this->qsize; qnum++) {
+			std::cout << std::setw(8) << this->data.front() << std::endl;
+			this->data.pop();
+		}
+		return true;
+	}
 }
 
-Queue q;
+//2 data queue
+class TwodataQueue {
+private:
+	const unsigned int MAX_QSIZE;
+	unsigned int qsize;
+	std::queue<double> data[2];
+public:
+	TwodataQueue();
+	void Get(double arg_data1, double arg_data2);
+	bool Disp(void);
+};
+
+TwodataQueue::TwodataQueue() :
+	MAX_QSIZE(8) {
+}
+
+//Queue storing
+void TwodataQueue::Get(double arg_data1, double arg_data2) {
+	this->data[0].push(arg_data1);
+	this->data[1].push(arg_data2);
+
+	for (unsigned int num = 0; num < 2; num++) {
+		if (this->data[num].size() > this->MAX_QSIZE) {
+			this->data[num].pop();
+		}
+	}
+	return;
+}
+
+//Displaying queue
+bool TwodataQueue::Disp() {
+	if (this->data[0].size() != this->data[1].size()) {
+		std::cerr << "Queue size is invalid" << std::endl;
+		return false;
+	}
+	else if (this->data[0].empty() == true) {
+		std::cerr << "Queue is empty" << std::endl;
+		return false;
+	}
+	else {
+		std::cout << "   data1" << "   data2" << std::endl;
+		this->qsize = this->data[0].size();
+		for (unsigned int qnum = 0; qnum < this->qsize; qnum++) {
+			std::cout << std::setw(8) << this->data[0].front()
+				<< std::setw(8) << this->data[1].front() << std::endl;
+			for (unsigned int num = 0; num < 2; num++) {
+				this->data[num].pop();
+			}
+		}
+		return true;
+	}
+}
+
+OnedataQueue q1;
+TwodataQueue q2;
 
 int main() {
-    double data[32];
+	double data1[32];
+	double data2[32];
 
-    //Data storing
-    for (int i = 0; i < 32; i++) {
-        data[i] = (double)i * 0.1;
-        q.Get(data[i]);
-    }
-    q.Disp();
+	//Data storing
+	for (int i = 0; i < 32; i++) {
+		data1[i] = (double)i * 0.1;
+		data2[i] = (double)i * 0.2;
+		q1.Get(data1[i]);
+		q2.Get(data1[i], data2[i]);
+	}
+	q1.Disp();
+	q2.Disp();
 
-    getchar();
-    return 0;
+	getchar();
+	return 0;
 }

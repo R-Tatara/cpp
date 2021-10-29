@@ -1,36 +1,27 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-typedef unsigned int uint;
-
-typedef struct{
+typedef struct {
 	int member;
 	char str[16];
 }structname;
 
-//非推奨（宣言にstructが必要なため）
-//struct structname1 {
-//	int member;
-//};
-
-void function(structname arg1, structname *arg2);
-
-structname A = {1, "hoge1"};
-structname B;
-structname tmpC;
-structname *C = &tmpC;
-structname D[2];
+void function(structname arg1, structname* arg2);
 
 int main() {
-	B.member = 2;
-	sprintf(B.str, "hoge2");
-	C->member = 3;
-	sprintf(C->str, "hoge3");
-	D[0].member = 4;
-	sprintf(D[0].str, "hoge4");
-
+	structname A = { 1, "hoge1" };
+	structname B;
+	structname tmp;
+	structname* C = &tmp;
+	structname D[2];
+	
 	function(A, &A);
-
+	B.member = 2;
+	sprintf_s(B.str, sizeof(B.str), "hoge2");
+	C->member = 3;
+	sprintf_s(C->str, sizeof(C->str), "hoge3");
+	D[0].member = 4;
+	sprintf_s(D[0].str, sizeof(D[0].str), "hoge4");
+	
 	printf("A : %d %s\n", A.member, A.str);
 	printf("B : %d %s\n", B.member, B.str);
 	printf("C : %d %s\n", C->member, C->str); //C->member = (*C).member
@@ -38,9 +29,8 @@ int main() {
 	return 0;
 }
 
-void function(structname arg1, structname *arg2) {
+void function(structname arg1, structname* arg2) {
 	arg1.member = 0; //値渡し
-	sprintf(arg2->str, "hoge0"); //参照渡し
-
+	sprintf_s(arg2->str, sizeof(arg2->str), "hoge0"); //参照渡し
 	return;
 }

@@ -1,108 +1,140 @@
-#include <stdio.h>
-#include <math.h>
-#include <conio.h>
+#include <iostream>
+using namespace std;
 
 #define PI 3.14159265358979323846264338327950288
-#define FUNCTION(TIME) (sin(TIME)) 
-#define SAMPLING_TIME 0.001 //[s]
-#define MAX_TIME 3.14  //[s]
-
-class Num {
-public:
-	double data_buf;
-	double data;
-	int function(double time) {
-		this->data_buf = FUNCTION(time - SAMPLING_TIME);
-		this->data = FUNCTION(time);
-		return 0;
-	}
-};
+#define SAMPLING_TIME 0.01 //[s]
 
 //Quadrature by parts
 class Simple {
-public:
+private:
 	double sum;
-	int  Integral(double data) {
-		this->sum += data * SAMPLING_TIME;
-		return 0;
-	}
-
-	Simple() {
-		sum = 0.0;
-	}
+public:
+	Simple();
+	void Integral(double data);
+	double GetResult(void);
 };
+
+Simple::Simple()
+	: sum(0.0)
+{
+}
+
+void Simple::Integral(double data) {
+	this->sum += data * SAMPLING_TIME;
+	return;
+}
+
+double Simple::GetResult(void) {
+	return this->sum;
+}
 
 //Trapezoidal rule
 class Trapezoid {
-public:
+private:
+	int cycle;
+	double data_pre;
 	double sum;
-	int  Integral(int cycle, double data_buf, double data) {
-		if (cycle != 0) {
-			this->sum += (data_buf + data) * SAMPLING_TIME / 2.0;
-		}
-		return 0;
-	}
-
-	Trapezoid() {
-		this->sum = 0.0;
-	}
+public:
+	Trapezoid();
+	void Integral(double data);
+	double GetResult(void);
 };
+
+Trapezoid::Trapezoid()
+	: cycle(0), data_pre(0.0), sum(0.0)
+{
+}
+
+void Trapezoid::Integral(double data) {
+	if (this->cycle == 0) {
+		this->data_pre = data;
+	}
+	else {
+		this->sum += (this->data_pre + data) * SAMPLING_TIME / 2.0;
+	}
+	this->data_pre = data;
+	this->cycle++;
+	return;
+}
+
+double Trapezoid::GetResult(void) {
+	return this->sum;
+}
 
 //Simpson's rule
 class Simpson {
-public:
-	double sum;
-	double sum_a;
+private:
+	int cycle;
+	double data_pre;
+	double offset;
 	double s1;
 	double s2;
-	double tmp;
-	int Integral(int cycle, double data_buf, double data) {
-		if (cycle == 0) {
-			this->tmp = data;
-		}
-		else if (cycle % 2 == 1) {
-			this->s1 += data;
-			this->sum_a = sum + (data_buf + data) * SAMPLING_TIME / 2.0; //Complemened by Trapezoidal rule
-		}
-		else if (cycle % 2 == 0 && cycle != 0) {
-			this->s2 += data;
-			this->sum = SAMPLING_TIME / 3.0 * (this->tmp - data + 4.0 * s1 + 2.0 * s2);
-			this->sum_a = this->sum;
-		}
-		return 0;
-	}
-
-	Simpson() {
-		this->sum = 0.0;
-		this->sum_a = 0.0;
-		this->s1 = 0.0;
-		this->s2 = 0.0;
-	}
+	double sum_odd;
+	double sum;
+public:
+	Simpson();
+	void Integral(double data);
+	double GetResult(void);
 };
 
-Num num;
+Simpson::Simpson()
+	:cycle(0),
+	data_pre(0.0),
+	offset(0.0),
+	s1(0.0),
+	s2(0.0),
+	sum_odd(0.0),
+	sum(0.0)
+{
+}
+
+void Simpson::Integral(double data) {
+	if (this->cycle == 0) {
+		this->offset = data;
+	}
+	else if (this->cycle % 2 == 1) { //Cycle is odd
+		this->s1 += data;
+		this->sum_odd = this->sum + (this->data_pre + data) * SAMPLING_TIME / 2.0;
+	}
+	else if (this->cycle % 2 == 0 && this->cycle != 0) { //Cycle is even
+		this->s2 += data;
+		this->sum = SAMPLING_TIME / 3.0 * (this->offset - data + 4.0 * this->s1 + 2.0 * this->s2);
+		this->sum_odd = this->sum;
+	}
+	this->data_pre = data;
+	this->cycle++;
+	return;
+}
+
+double Simpson::GetResult(void) {
+	if (this->cycle % 2 == 1) { //Cycle is odd
+		cout << "[WARN]Simpson integration interval is odd." << endl;
+	}
+	return this->sum;
+}
+
 Simple simple;
 Trapezoid trapezoid;
 Simpson simpson;
 
 int main() {
-	int i = 0;
-	double time = 0.0;
+	double time;
+	double data;
 
-	while (time < MAX_TIME) {
-		time = SAMPLING_TIME * i;
-		num.function(time);
-		simple.Integral(num.data);
-		trapezoid.Integral(i, num.data_buf, num.data);
-		simpson.Integral(i, num.data_buf, num.data);
-		printf("Time : %lf, Val : %+lf, Sum1 : %+lf, Sum2 : %+lf, Sum3 : %+lf\n",
-			time,
-			num.data,
-			simple.sum,
-			trapezoid.sum,
-			simpson.sum_a);
-		i++;
+	for (int i = 0; i < 314; i++) {
+		time = (double)i * SAMPLING_TIME;
+		data  = sin(time);
+		simple.Integral(data);
+		trapezoid.Integral(data);
+		simpson.Integral(data);
+
+		cout << "Time = " << time << " Value = " << data << endl;
 	}
+
+	cout << endl << "--- Integration result ---" << endl;
+	cout << "Simple    : " << simple.GetResult() << endl;
+	cout << "Trapezoid : " << trapezoid.GetResult() << endl;
+	cout << "Simpson   : " << simpson.GetResult() << endl;
 
 	getchar();
 	return 0;

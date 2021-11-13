@@ -15,12 +15,6 @@ int main() {
 	double y4 = 30.0;
 	double denom, tmp1, tmp2, nume_x, nume_y; //For intersection calculation
 	double x, y; //Intersection of vector1_2 and vector3_4
-	double dist1; //Distance between (x3, y3) and intersection
-	double dist2; //Distance between (x4, y4) and intersection
-	double dist3; //Distance between (x4, y4) and intersection
-	double gain_ans; //Estimated gain
-	double gain1 = 0.7;
-	double gain2 = 1.0;
 
 	//Intersection calculation
 	tmp1 = y3 * x4 - x3 * y4;

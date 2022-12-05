@@ -3,47 +3,39 @@
 #include <windows.h>
 #include "Header.h"
 
-//Global object definition
-file logfile;
-
 //Function definition
-file InitFileName() {
+void GetDateForFilename(char *p_string) {
     SYSTEMTIME st;
 
     GetLocalTime(&st);
-    sprintf_s(logfile.name, STR_SIZE, "Log_%04d%02d%02d-%02d%02d%02d_%03d.txt",
+    sprintf_s(p_string, SIZE_64, "Log_%04d%02d%02d-%02d%02d%02d.txt",
+            st.wYear, st.wMonth, st.wDay,
+            st.wHour, st.wMinute, st.wSecond);
+
+    return;
+}
+
+void GetDateForLog(char *p_string) {
+    SYSTEMTIME st;
+
+    GetLocalTime(&st);
+    sprintf_s(p_string, SIZE_64, "%04d/%02d/%02d %02d:%02d:%02d.%03d",
             st.wYear, st.wMonth, st.wDay,
             st.wHour, st.wMinute, st.wSecond,
             st.wMilliseconds);
 
-    return logfile;
+    return;
 }
 
-//file InitFileName() {
-//    time_t tim = time(NULL);
-//    struct tm now_time;
-//    errno_t error = localtime_s(&now_time, &tim);
-//
-//    sprintf_s(logfile.name, STR_SIZE, "Log_%04d%02d%02d-%02d%02d%02d.csv",
-//        now_time.tm_year + 1900,
-//        now_time.tm_mon + 1,
-//        now_time.tm_mday,
-//        now_time.tm_hour,
-//        now_time.tm_min,
-//        now_time.tm_sec);
-//
-//    return logfile;
-//};
-
-void AppendString(file file, const char append_str[]) {
-    std::ofstream ofs(file.name, std::ios::app);
+void AppendString(const char *p_filename, const char append_str[]) {
+    std::ofstream ofs(p_filename, std::ios::app);
 
     if (!ofs) {
         std::cerr << "Failed to open file." << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    ofs << append_str << std::endl;
+    ofs << append_str;
     ofs.close();
     return;
 };

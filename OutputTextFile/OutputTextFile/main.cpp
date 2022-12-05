@@ -1,13 +1,17 @@
 #include "Header.h"
 #include <string.h>
+#include <iostream>
 
 int main() {
-    char append_str[STR_SIZE];
+    char filename[SIZE_64];
+    char date_time[SIZE_64];
+    char log_line[SIZE_80];
 
-    file logfile = InitFileName();
+    GetDateForFilename(filename);
 
-    strcpy_s(append_str, STR_SIZE, "OK");
-    AppendString(logfile, append_str);
+    GetDateForLog(date_time);
+    sprintf_s(log_line, SIZE_80, "%s %s: Sample\n", LVL_INFO, date_time);
+    AppendString(filename, log_line);
 
     return 0;
 }

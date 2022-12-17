@@ -1,18 +1,17 @@
 #include <iostream>
 #include <vector>
 #include <windows.h>
-#include <time.h>
 using namespace std;
 
 const static int LAP_BUFF_SIZE = 5;
 
 class StopWatch {
 private:
-	double			start;
-	double			end;
-	vector<double>	lap;
-	bool			is_started;
-	double			Get(void);
+	double			start;		//Relative time when count is started
+	double			end;		//Time from start to end
+	vector<double>	lap;		//Time from start to lap
+	bool			is_started;	//True: Time count started, False: Not started
+	double			Get(void);	//Get relative time from system boot
 public:
 	StopWatch();
 	~StopWatch();
@@ -23,7 +22,9 @@ public:
 };
 
 StopWatch::StopWatch()
-	:start(0.0), end(0.0), is_started(false)
+	:start(0.0), 
+	 end(0.0), 
+	 is_started(false)
 {
 }
 
@@ -32,18 +33,18 @@ StopWatch::~StopWatch()
 }
 
 void StopWatch::Start() {
-	this->start = this->Get();
+	//Clear time
 	this->end = 0.0;
-	this->is_started = true;
-
-	//Clear lap time
 	this->lap.clear();
-    this->lap.shrink_to_fit();
+	this->lap.shrink_to_fit();
+
+	this->start = this->Get();
+	this->is_started = true;
 	return;
 }
 
 bool StopWatch::Lap() {
-	double now;
+	double now; //Relative time from system boot
 
 	if (this->is_started == false) {
 		cerr << "Lap() called before SetStart()" << endl;
@@ -61,7 +62,7 @@ bool StopWatch::Lap() {
 }
 
 bool StopWatch::Stop() {
-	double now;
+	double now; //Relative time from system boot
 
 	if (is_started == false) {
 		cerr << "Stop() called before SetStart()" << endl;
@@ -74,7 +75,7 @@ bool StopWatch::Stop() {
 }
 
 double StopWatch::Get(void) {
-	double sys_time_count;
+	double sys_time;
 	static LARGE_INTEGER freq;
 	LARGE_INTEGER time;
 
@@ -82,8 +83,8 @@ double StopWatch::Get(void) {
 		QueryPerformanceFrequency(&freq);
 	}
 	QueryPerformanceCounter(&time);
-	sys_time_count = time.QuadPart / (double)freq.QuadPart;
-	return sys_time_count;
+	sys_time = (double)time.QuadPart / (double)freq.QuadPart;
+	return sys_time;
 }
 
 void StopWatch::Print() {
@@ -100,13 +101,14 @@ int main()
 
 	sw.Start();
 
-	//Process 1
+	//--------------------------------
 	Sleep(500); //0.5s
+	//--------------------------------
 	sw.Lap();
 
-	//Process 2
+	//--------------------------------
 	Sleep(500); //0.5s
-	sw.Lap();
+	//--------------------------------
 
 	sw.Stop();
 	sw.Print();

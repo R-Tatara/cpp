@@ -24,6 +24,10 @@
 
 記録した時間情報(STARTボタンが押された時間を基準に、LAPボタン、STOPボタンが押された時間)を表示します。
 
+# Requirements
+
+Windows
+
 # Author
 
 Ryosuke Tatara
